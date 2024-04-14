@@ -12,13 +12,14 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, Link as RouterLink } from "react-router-dom";
 import { useFormik } from "formik";
 // import { LoginSchema } from '../schemas';
 import { useDispatch, useSelector } from "react-redux";
 import { ForgotPasswordSchema } from "../../schemas";
 import { forgotPassword } from "../../Actions/User";
+import { clearError, clearMessage } from "../../Reducer/Post";
 
 const initialValues = {
   email: "",
@@ -27,22 +28,38 @@ const initialValues = {
 const ForgotPassword = () => {
   const dispatch = useDispatch();
 
-  const { isAuthenticated } = useSelector((state) => {
-    return state.user;
+  const { isAuthenticated,error,message} = useSelector((state) => {
+    return state.post;
   });
 
+  // console.log(error)
   const toast = useToast();
-
-  const submitToast = (message) => {
-    toast({
-      title: "Login",
-      description: `${message}`,
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-      position: "bottom-left",
-    });
-  };
+  useEffect(()=>{
+    if(message)
+    {
+      toast({
+        title: "",
+        description:`${message}`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+    dispatch(clearMessage());
+    if(error)
+    {
+      toast({
+        title: "",
+        description:`${error}`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+    dispatch(clearError());
+  },[message,error])
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -51,7 +68,7 @@ const ForgotPassword = () => {
 
       onSubmit: async (values, e) => {
         const { email } = values;
-        console.log(email);
+        // console.log(email);
         // dispatch(loginUser(email,password));
         dispatch(forgotPassword(email));
       },

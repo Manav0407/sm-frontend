@@ -20,7 +20,7 @@ export const likePost = (postId) => async (dispatch) => {
   try {
     // console.log(postId);
     dispatch(likeRequest());
-    const { data } = await axios.get(`https://socialmedia-banckend.onrender.com/api/v1/post/${postId}`);
+    const { data } = await axios.get(`http://localhost:4000/api/v1/post/${postId}`);
     dispatch(likeSuccess(data.message));
   } catch (error) {
     dispatch(likeFailure(error));
@@ -33,7 +33,7 @@ export const addComment = (postId, comment) => async (dispatch) => {
     dispatch(addCommentRequest());
     // console.log(postId);
     const { data } = await axios.put(
-      `https://socialmedia-banckend.onrender.com/api/v1/post/comment/${postId}`,
+      `http://localhost:4000/api/v1/post/comment/${postId}`,
       {
         comment,
       },
@@ -58,7 +58,7 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
     dispatch(deleteCommentRequest());
     // console.log(postId);
     const { data } = await axios.delete(
-      `https://socialmedia-banckend.onrender.com/api/v1/post/comment/${postId}`,
+      `http://localhost:4000/api/v1/post/comment/${postId}`,
       {
         data:{commentId},
       },
@@ -79,10 +79,10 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
 
 export const newPost = (caption, image) => async (dispatch) => {
   try {
-    console.log("bc");
+    // console.log("bc");
     dispatch(newPostRequest());
     const { data } = await axios.post(
-      "https://socialmedia-banckend.onrender.com/api/v1/post/upload",
+      "http://localhost:4000/api/v1/post/upload",
       {
         caption,
         image,

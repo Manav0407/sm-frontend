@@ -70,7 +70,7 @@ export const loginUser = (email, password) => async (dispatch) => {
   try {
     dispatch(LoginRequest());
     const { data } = await axios.post(
-      "https://socialmedia-banckend.onrender.com/api/v1/login",
+      "http://localhost:4000/api/v1/login",
       {
         email,
         password, 
@@ -92,8 +92,9 @@ export const loginUser = (email, password) => async (dispatch) => {
     dispatch(LoginSuccess());
     // console.log(data.message)
   } catch (error) {
-    // dispatch(LoginFailure(error.response.data.message));
-    // console.log(error?.response?.data?.message);
+    console.log(error)
+    // dispatch(LoginFailure(error?.response.data.message));
+    // console.log(error);
   }
 };
 
@@ -114,7 +115,7 @@ export const registerUser = (username,email,password,avatar) => async (dispatch)
   try {
     dispatch(RegisterRequest());
     const { data } = await axios.post(
-      "https://socialmedia-banckend.onrender.com/api/v1/register",
+      "http://localhost:4000/api/v1/register",
       {
         username,
         email,
@@ -137,7 +138,7 @@ export const registerUser = (username,email,password,avatar) => async (dispatch)
     // toast(data.message);
   } catch (error) {
     dispatch(RegisterFailure(error.response.data.message));
-    console.log(error)
+    // console.log(error)
   }
 };
 
@@ -145,7 +146,7 @@ export const updateProfile = (username,email,avatar) => async (dispatch) => {
   try {
     dispatch(updateProfileRequest());
     const { data } = await axios.put(
-      "https://socialmedia-banckend.onrender.com/api/v1/update/profile",
+      "http://localhost:4000/api/v1/update/profile",
       {
         username,
         email,
@@ -170,7 +171,7 @@ export const updatePassword = (oldpassword,newpassword) => async (dispatch) => {
   try {
     dispatch(updatePasswordRequest());
     const { data } = await axios.put(
-      "https://socialmedia-banckend.onrender.com/api/v1/update/password",
+      "http://localhost:4000/api/v1/update/password",
       {
         oldpassword,
         newpassword,
@@ -194,7 +195,7 @@ export const forgotPassword = (email) => async (dispatch) => {
   try {
     dispatch(forgotPasswordRequest());
     const { data } = await axios.post(
-      "https://socialmedia-banckend.onrender.com/api/v1/forgot/password",
+      "http://localhost:4000/api/v1/forgot/password",
       {
         email,
       },
@@ -219,7 +220,7 @@ export const resetPassword = (id,password) => async (dispatch) => {
     // console.log(password);
     dispatch(resetPasswordRequest());
     const { data } = await axios.put(
-      `https://socialmedia-banckend.onrender.com/api/v1/password/reset/${id}`,
+      `http://localhost:4000/api/v1/password/reset/${id}`,
       {
          password,
       },
@@ -242,11 +243,12 @@ export const resetPassword = (id,password) => async (dispatch) => {
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch(LoadUserRequest());
-    const { data } = await axios.get("https://socialmedia-banckend.onrender.com/api/v1/me");
+    const { data } = await axios.get("http://localhost:4000/api/v1/me");
     // console.log(data.user);
     dispatch(LoadUserSuccess(data.user));
   } catch (error) {
-    dispatch(LoadUserFailure(error.response.data.message));
+    dispatch(LoadUserFailure(error));
+    // console.log(error)
   }
 };
 
@@ -254,7 +256,7 @@ export const getFollowingPosts = () => async (dispatch) => {
   try {
     dispatch(postOfFollowingRequest());
 
-    const { data } = await axios.get("https://socialmedia-banckend.onrender.com/api/v1/posts");
+    const { data } = await axios.get("http://localhost:4000/api/v1/posts");
 
     dispatch(postOfFollowingSuccess(data.posts));
   } catch (error) {
@@ -266,7 +268,7 @@ export const getMyFollowings = () => async (dispatch) => {
   try {
     dispatch(myFollowingsRequest());
 
-    const { data } = await axios.get("https://socialmedia-banckend.onrender.com/api/v1/my/followings");
+    const { data } = await axios.get("http://localhost:4000/api/v1/my/followings");
 
     dispatch(myFollowingsSuccess(data.followings));
   } catch (error) {
@@ -278,7 +280,7 @@ export const getFollowingStories = () => async (dispatch) => {
   try {
     // console.log("thay che")
     dispatch(storyOfFollowingRequest());
-    const { data } = await axios.get("https://socialmedia-banckend.onrender.com/api/v1/stories");
+    const { data } = await axios.get("http://localhost:4000/api/v1/stories");
     // console.log(data.story);
     dispatch(storyOfFollowingSuccess(data.story));
   } catch (error) {
@@ -290,7 +292,7 @@ export const getMyPosts = () => async (dispatch) => {
   try {
     dispatch(myPostRequest());
 
-    const { data } = await axios.get("https://socialmedia-banckend.onrender.com/api/v1/my/posts");
+    const { data } = await axios.get("http://localhost:4000/api/v1/my/posts");
 
     dispatch(myPostSuccess(data.posts));
   } catch (error) {
@@ -302,7 +304,7 @@ export const getUserPosts = (id) => async (dispatch) => {
   try {
     dispatch(userPostRequest());
 
-    const { data } = await axios.get(`https://socialmedia-banckend.onrender.com/api/v1/userposts/${id}`);
+    const { data } = await axios.get(`http://localhost:4000/api/v1/userposts/${id}`);
 
     dispatch(userPostSuccess(data.posts));
   } catch (error) {
@@ -315,7 +317,7 @@ export const getAllUsers = (username="") => async (dispatch) => {
   try {
     dispatch(allUsersRequest());
 
-    const { data } = await axios.get(`https://socialmedia-banckend.onrender.com/api/v1/users?username=${username}`);
+    const { data } = await axios.get(`http://localhost:4000/api/v1/users?username=${username}`);
     // console.log(data);
     dispatch(allUsersSuccess(data.users));
   } catch (error) {
@@ -327,7 +329,7 @@ export const getUserProfile = (id) => async (dispatch) => {
   try {
     dispatch(userProfileRequest());
 
-    const { data } = await axios.get(`https://socialmedia-banckend.onrender.com/api/v1/user/${id}`);
+    const { data } = await axios.get(`http://localhost:4000/api/v1/user/${id}`);
     // console.log(data);
     dispatch(userProfileSuccess(data.user));
   } catch (error) {
@@ -338,7 +340,7 @@ export const followUnfollowUser = (userId) => async (dispatch) => {
   try {
     dispatch(followUnfollowRequest());
 
-    const { data } = await axios.get(`https://socialmedia-banckend.onrender.com/api/v1/follow/${userId}`);
+    const { data } = await axios.get(`http://localhost:4000/api/v1/follow/${userId}`);
     // console.log(data);
     dispatch(followUnfollowSuccess(data.message));
   } catch (error) {
@@ -350,7 +352,7 @@ export const deleteMyProfile = () => async (dispatch) => {
   try {
     // console.log("thay che")
     dispatch(deleteProfileRequest());
-    const { data } = await axios.delete("https://socialmedia-banckend.onrender.com/api/v1/delete/profile");
+    const { data } = await axios.delete("http://localhost:4000/api/v1/delete/profile");
     // console.log(data.story);
     dispatch(deleteProfileSuccess(data.message));
   } catch (error) {

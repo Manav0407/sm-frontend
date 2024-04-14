@@ -59,6 +59,7 @@ const Search = () => {
             padding={9}
             h={"2xl"}
             w={["sm", "md", "lg", "xl"]}
+            // overflow={"scroll"}
           >
             <Heading
               className="typewriter"
@@ -92,10 +93,17 @@ const Search = () => {
                 </Button>
               </VStack>
             </form>
+            <Box
+            mt={5}
+            // border={"2px solid gray"}
+            h={"70%"}
+            overflowY={"scroll"}
+            >            
             {
               users && users.length > 0 && 
               users.map((item)=>(
-                <Box mt={4}>
+                <Box mt={4}
+                >
                 <SearchUser
                 key={item?._id}
                 userId={item?._id}
@@ -106,6 +114,8 @@ const Search = () => {
                 </Box>
               ))
             }
+            </Box>
+
           </Box>
         </Flex> 
       </Center>

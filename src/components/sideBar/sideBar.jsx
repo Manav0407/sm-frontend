@@ -5,6 +5,7 @@ import {
   Text,
   Flex,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { PiInstagramLogoThin } from "react-icons/pi";
@@ -19,6 +20,7 @@ import { Search } from "./Search";
 import { Message } from "./Message";
 import { Notification} from "./Notification";
 import { Logout } from "./Logout";
+import { clearError, clearMessage } from "../../Reducer/Post";
 const SideBar = () => {
   const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
   const dispatch = useDispatch();
@@ -35,6 +37,40 @@ const SideBar = () => {
   useEffect(()=>{
     setAvatar(user?.avatar?.url)
   });
+
+  const { loading, error, message } = useSelector((state) => {
+    return state.post;
+  });
+
+  // console.log(message)
+  // console.log(error)
+const toast = useToast();
+  useEffect(()=>{
+    if(message)
+      {
+          toast({
+            title:message,
+            status:"success",
+            message:message,
+            duration:3000,
+            position:"bottom-left",
+            isClosable:true
+          })
+      }
+      dispatch(clearMessage())
+    if(error)
+    {
+      toast({
+        title:error,
+        status:"error",
+        message:error,
+        duration:5000,
+        isClosable:true
+      })
+    } 
+    dispatch(clearError())
+  },[message,error]);
+
 
 
   return (

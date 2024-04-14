@@ -31,6 +31,7 @@ import {
 } from "firebase/storage";
 import app from "../../firebase";
 import { updateProfile } from "../../Actions/User";
+import { clearError, clearMessage } from "../../Reducer/Post";
 
 const initialValues = {
   username: "",
@@ -51,10 +52,42 @@ const EditProfile = () => {
     return state.user;
   });
 
-  const {message} = useSelector((state)=>{
+  const {message,error} = useSelector((state)=>{
     return state.post;
   });
 
+  // const { isAuthenticated,error,message:useMsg} = useSelector((state) => {
+  //   return state.user;
+  // });
+
+  // console.log(error)
+  const toast = useToast();
+  useEffect(()=>{
+    if(message)
+    {
+      toast({
+        title: "",
+        description:`${message}`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+    dispatch(clearMessage());
+    if(error)
+    {
+      toast({
+        title: "",
+        description:`${error}`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+    dispatch(clearError());
+  },[message,error])
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();

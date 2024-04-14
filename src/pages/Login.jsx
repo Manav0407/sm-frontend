@@ -40,6 +40,20 @@ const Login = () => {
     return state.user;
   });
 
+  useEffect(()=>{
+    if(error)
+    {
+      toast({
+        title: "Login",
+        description: `${error}`,
+        status: "error",
+        duration: 3000,
+        position: "bottom-left",
+        isClosable: true,
+      });
+    }
+  },[error])
+
   const toast = useToast();
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -54,7 +68,7 @@ const Login = () => {
       },
     });
 
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);  
   if (isAuthenticated) {
     return <Navigate to={"/"} />;
   }

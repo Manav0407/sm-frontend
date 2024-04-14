@@ -50,7 +50,6 @@ export const CreatePost = () => {
 
 
   const dispatch = useDispatch();
-  const toast = useToast();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -133,33 +132,8 @@ export const CreatePost = () => {
     dispatch(loadUser());
   };
 
-  useEffect(()=>{
-    if(error)
-    {
-      toast({
-        title:error,
-        status:"error",
-        message:error.message,
-        duration:5000,
-        isClosable:true
-      })
-
-      if(message)
-      {
-          toast({
-            title:message,
-            status:"success",
-            message:message.message,
-            duration:5000,
-            isClosable:true
-          })
-      }
-    }
-  })
-
-  const { loading, error, message } = useSelector((state) => {
-    return state.post;
-  });
+  
+ 
 
   // console.log(loading );
   // console.log(error );

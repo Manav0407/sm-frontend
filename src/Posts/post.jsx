@@ -32,6 +32,39 @@ const Post = () => {
 // console.log((date1.getTime() - date2.getTime())/86400000);
 // console.log(date - posts[0]?.createdAt);
 
+// const { isAuthenticated,error:postError,message} = useSelector((state) => {
+//   return state.post;
+// });
+
+// // console.log(error)
+// const toast = useToast();
+// useEffect(()=>{
+//   if(message)
+//   {
+//     toast({
+//       title: "",
+//       description:`${message}`,
+//       status: "success",
+//       duration: 3000,
+//       isClosable: true,
+//       position: "bottom-left",
+//     });
+//   }
+//   dispatch(clearMessage());
+//   if(error)
+//   {
+//     toast({
+//       title: "",
+//       description:`${error}`,
+//       status: "error",
+//       duration: 3000,
+//       isClosable: true,
+//       position: "bottom-left",
+//     });
+//   }
+//   dispatch(clearError());
+// },[message,error])
+
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);

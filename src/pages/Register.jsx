@@ -133,6 +133,33 @@ const Register = () => {
       return state.user;
     });
 
+    // console.log(error)
+    const toast = useToast();
+    useEffect(()=>{
+      if(message)
+      {
+        toast({
+          title: "Register",
+          description:`${message}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "bottom-left",
+        });
+      }
+      if(error)
+      {
+        toast({
+          title: "Register",
+          description:`${error}`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "bottom-left",
+        });
+      }
+    },[message,error])
+
   return (
     <>
       <Center w={"100vw"} h={"100vh"}>

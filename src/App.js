@@ -22,51 +22,51 @@ import Message from "./components/messaging/Message";
 function App() {
   const dispatch = useDispatch();
 
-  const toast = useToast();
-  const { message,error,loading } = useSelector((state) => {
-    return state.post;
-  });
+  // const toast = useToast();
+  // const { message,error,loading } = useSelector((state) => {
+  //   return state.post;
+  // });
 
-  const {message:userMsg,error:userError} =useSelector((state)=>{
-    return state.user;
-  })
+  // const {message:userMsg,error:userError} =useSelector((state)=>{
+  //   return state.user;
+  // })
 
-  console.log(userMsg);
-  const submitToast = (msg,x) => {
-    toast({
-      title: "",
-      description: `${msg}`,
-      status: x,
-      duration: 3000,
-      isClosable: true,
-      position: "bottom-left",
-    });
-  };
+  // console.log(userMsg);
+  // const submitToast = (msg,x) => {
+  //   toast({
+  //     title: "",
+  //     description: `${msg}`,
+  //     status: x,
+  //     duration: 3000,
+  //     isClosable: true,
+  //     position: "bottom-left",
+  //   });
+  // };
 
   // console.log(message);
-  const s = "success";
-  const e = "error";
-  useEffect(() => {
-    if (message) {
-      submitToast(message,s);
-      // dispatch(clearMessage());
-    }
-    else if(userMsg)
-    {
-      submitToast(userMsg,s);
-      dispatch(clearMessage());
-    }
-    else if(error)
-    {
-      submitToast(error,e);
-    }
-    else if(userError)
-    {
-      submitToast(userError,e);
-      dispatch(clearErrors());
-    }
+  // const s = "success";
+  // const e = "error";
+  // useEffect(() => {
+  //   if (message) {
+  //     submitToast(message,s);
+  //     // dispatch(clearMessage());
+  //   }
+  //   else if(userMsg)
+  //   {
+  //     submitToast(userMsg,s);
+  //     dispatch(clearMessage());
+  //   }
+  //   else if(error)
+  //   {
+  //     submitToast(error,e);
+  //   }
+  //   else if(userError)
+  //   {
+  //     submitToast(userError,e);
+  //     dispatch(clearErrors());
+  //   }
    
-  },[message,userError,userMsg,error]);
+  // },[message,userError,userMsg,error]);
 
   useEffect(() => {
     dispatch(loadUser());
