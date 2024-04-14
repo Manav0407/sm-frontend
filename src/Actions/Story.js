@@ -7,7 +7,7 @@ export const createStory = (image) => async (dispatch) => {
       // console.log("bc");
       dispatch(newStoryRequest(image));
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/story/upload",
+        "https://socialmedia-banckend.onrender.com/api/v1/story/upload",
         {
           image,
         },
